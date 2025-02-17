@@ -3,13 +3,13 @@ pragma solidity ^0.8.4;
 
 import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {ERC721URIStorage} from "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "../node_modules/@openzeppelin/contracts/utils/Counters.sol";
+import {Counters} from "@openzeppelin/contracts/utils/Counters.sol";
 
 
 import "hardhat/console.sol";
 
 contract NFTMarketPlace is ERC721URIStorage{
-    using Counters for Counters.Counters;
+    using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
     Counters.Counter private _itemsSold;
 
@@ -39,13 +39,13 @@ contract NFTMarketPlace is ERC721URIStorage{
     }
 
     constructor() ERC721("NFT TOKEN","MYNFT"){
-        owner ==payable(msg.sender);
+        owner = payable(msg.sender);
     }
 
 
     function updateListingPrice(uint _listingprice) public payable onlyOwner{
-       listingPrice =_listingprice
-    };
+       listingPrice =_listingprice;
+    }
 
     function getListingPrice() public view returns (uint){
         return listingPrice;
@@ -53,7 +53,7 @@ contract NFTMarketPlace is ERC721URIStorage{
 
     //Let create "create nft token function"
     function createToken(string memory tokenURI,uint price) public payable returns(uint){
-        uint256 newTokenId = _nextTokenId++;
+         uint newTokenId=_tokenIds.current();
         _safeMint(msg.sender,newTokenId);
         _setTokenURI(newTokenId,tokenURI);
 
@@ -71,7 +71,7 @@ contract NFTMarketPlace is ERC721URIStorage{
             payable(msg.sender),
             payable(address(this)),
             price,
-            false,
+            false
         );
 
         _transfer(msg.sender, address(this), tokenId);
@@ -79,16 +79,16 @@ contract NFTMarketPlace is ERC721URIStorage{
         emit idMarketItemCreated(tokenId,msg.sender,address(this),price,false);
     }
 
-    function reSellToken(uint tokenId, uint price)public payable(){
+    function reSellToken(uint tokenId, uint price)public payable{
         require(idMarketItem[tokenId].owner == msg.sender,"only item owner can perform this operation");
         require(msg.value == listingPrice, "price must be equal to listingPrice");
         
         idMarketItem[tokenId].sold=false;
         idMarketItem[tokenId].price=price;
         idMarketItem[tokenId].seller=payable(msg.sender);
-        idMarketItem[tokenId].owner=payble(address(this));
+        idMarketItem[tokenId].owner=payable(address(this));
 
-        _itemeSold.decrement();
+        _itemsSold.decrement();
 
         _transfer(msg.sender, address(this), tokenId);
 
@@ -97,13 +97,13 @@ contract NFTMarketPlace is ERC721URIStorage{
 
     function createMarketSale(uint tokenId) public payable{
         uint price =idMarketItem[tokenId].price;
-        require(msg.vlaue== price,"pleace submit the asking price in order to complete the transection");
+        require(msg.value == price,"pleace submit the asking price in order to complete the transection");
         
         idMarketItem[tokenId].owner=payable(msg.sender);
         idMarketItem[tokenId].sold=true;
-        idMarketItem[tokenId].owner=payble(address(0));
+        idMarketItem[tokenId].owner=payable(address(0));
 
-        _itemsSold.increament();
+        _itemsSold.increment();
 
         _transfer(address(this),msg.sender,tokenId);
         payable(owner).transfer(listingPrice);
@@ -112,16 +112,16 @@ contract NFTMarketPlace is ERC721URIStorage{
 
         function fetchMarketItem()public view returns(MarketItem[] memory){
             uint itemCount=_tokenIds.current();
-            uint unSoldItemCount=_tokenIds.current();-_itemeSold.current();
+            uint unSoldItemCount=_tokenIds.current()-_itemsSold.current();
             uint currentIndex=0;
 
             MarketItem[] memory items= new MarketItem[](unSoldItemCount);
             for (uint i=0; i< itemCount; i++){
                 if(idMarketItem[i+1].owner==address(this)){
                    uint currentId =i+1;
-                   MarketItem storage currentItem=IdMarketItem[currentId];
+                   MarketItem storage currentItem=idMarketItem[currentId];
                    items[currentIndex]=currentItem;
-                   currentIndex +=1
+                   currentIndex +=1;
                 }
             }
             return items;
@@ -159,14 +159,14 @@ contract NFTMarketPlace is ERC721URIStorage{
             uint itemCount=0;
             uint currentIndex=0;
             for(uint i=0; i<totalCount;i++){
-                if(IdMarketItem[i+1].seller == msg.sender){
+                if(idMarketItem[i+1].seller == msg.sender){
                     itemCount+=1;
                 }
             }
             MarketItem[]memory items= new MarketItem[](itemCount);
             for(uint i =0;i<totalCount;i++){
                 if(idMarketItem[i+1].seller==msg.sender){
-                    uint currentd=i+1;
+                    uint currentId=i+1;
 
                     MarketItem storage currentItem=idMarketItem[currentId];
                     items[currentIndex]=currentItem;
