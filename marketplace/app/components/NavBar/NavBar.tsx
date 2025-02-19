@@ -20,10 +20,10 @@ export default function NavBar() {
   const [sidebar, setSidebar] = useState(false);
 
   return (
-    <nav className="flex items-center justify-between px-6 py-4 bg-white shadow-md fixed w-full z-50">
+    <nav className="flex items-center justify-between px-6 py-4 bg-white shadow-md fixed w-full  z-50">
       {/* Left Side - Logo & Marketplace Name */}
       <div className="flex items-center gap-3">
-        <Image src="/logo.png" alt="Marketplace Logo" width={40} height={40} className="rounded-full object-cover"/>
+        <Image src="/logo.png" alt="Marketplace Logo" width={40} height={40} className="rounded-full object-cover "/>
         <h1 className="text-xl font-semibold text-gray-800">Marketplace</h1>
       </div>
 
