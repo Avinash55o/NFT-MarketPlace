@@ -13,7 +13,7 @@ export default function Dashboard() {
         <NavBar />
       </nav>
       {/* hero */}
-      <div className="scrollbar-hide ">
+      <div className="mt-10 ">
         <HeroSection />
       </div>
       {/* services */}
