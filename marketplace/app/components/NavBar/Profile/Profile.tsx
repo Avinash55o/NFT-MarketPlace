@@ -22,7 +22,7 @@ export default function Profile({ close }: CloseableComponentProps) {
       id: 1,
       icon: <FaUserAlt className="text-gray-600" />,
       label: "My Profile",
-      link: "/myprofile",
+      link: "/Profile",
     },
     {
       id: 2,
