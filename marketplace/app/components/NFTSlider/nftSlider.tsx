@@ -76,7 +76,7 @@ export default function NFTSlider() {
 
   return (
     <div className="relative w-full flex flex-col items-center justify-center bg-[#0d0d0d] py-12">
-      <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">🔥 Featured NFTs</h2>
+      <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Featured NFTs</h2>
 
       <div className="relative w-full max-w-2xl md:h-[650px] h-[450px] overflow-hidden"> {/* Fixed height */}
   <AnimatePresence mode="wait">
