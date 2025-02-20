@@ -49,13 +49,16 @@ export default function Discover({ close }: CloseableComponentProps) {
 
   return (
     <div
-      className="absolute top-full left-0 mt-2 w-64 bg-white shadow-lg rounded-md overflow-hidden z-50"
+      className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-md overflow-hidden z-50 "
       style={{ zIndex: 1000 }}
     >
+      
       {/* Header */}
       <div className="px-4 py-3 border-b border-gray-200 bg-gray-100">
-        <h3 className="text-sm font-semibold text-gray-800">Discover</h3>
+        <h3 className="text-sm font-semibold text-gray-900">Discover</h3>
       </div>
+      {/* background color */}
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 blur-3xl  opacity-30" />
 
       {/* Discover List */}
       <div className="py-2">
