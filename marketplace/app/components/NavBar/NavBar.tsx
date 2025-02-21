@@ -20,21 +20,20 @@ export default function NavBar() {
   const [sidebar, setSidebar] = useState(false);
 
   return (
-    <nav className="flex items-center justify-between px-6 py-4 bg-white shadow-md fixed w-full  z-50">
+    <nav className="flex items-center justify-between px-6 py-4 fixed w-full z-50 bg-gradient-to-r from-purple-500 to-blue-500 bg-opacity-30 backdrop-blur-3xl shadow-lg border-b border-white/20">
       {/* Left Side - Logo & Marketplace Name */}
       <div className="flex items-center gap-3">
-        <Image src="/logo.png" alt="Marketplace Logo" width={40} height={40} className="rounded-full object-cover "/>
-        <h1 className="text-xl font-semibold text-gray-800">Marketplace</h1>
+        <a href="/dashboard">
+          <Image src="/logo.png" alt="Marketplace Logo" width={40} height={40} className="rounded-full object-cover shadow-md"/>
+        </a>
+        <h1 className="text-xl font-semibold text-white tracking-wide">Marketplace</h1>
       </div>
 
       {/* Center - Desktop Navigation */}
       <div className="relative hidden md:flex items-center gap-6">
         {/* discover dropdown */}
         <div className="relative">
-          <button
-            onClick={() => setDiscover(!discover)}
-            className="text-gray-700 hover:text-gray-900"
-          >
+          <button onClick={() => setDiscover(!discover)} className="text-white hover:text-gray-200 transition-all duration-300 font-medium">
             Discover
           </button>
           {discover && <Discover close={() => setDiscover(false)} />}
@@ -42,38 +41,30 @@ export default function NavBar() {
         
         {/* help center drop down */}
         <div className="relative">
-        <button
-          onClick={() => setHelp(!help)}
-          className="text-gray-700 hover:text-gray-900"
-        >
-          Help Center
-        </button>
-        {help && <HelpCenter close={()=> setHelp(false)} />}
+          <button onClick={() => setHelp(!help)} className="text-white hover:text-gray-200 transition-all duration-300 font-medium">
+            Help Center
+          </button>
+          {help && <HelpCenter close={()=> setHelp(false)} />}
         </div>
-        
       </div>
 
       {/* Right Side - Icons & Profile */}
       <div className="flex items-center gap-4">
-        <BsSearch className="text-xl text-gray-600 cursor-pointer hover:text-gray-800" />
+        <BsSearch className="text-xl text-white cursor-pointer hover:text-gray-200 transition-all duration-300" />
+        
         {/* notification dropdown */}
         <div>
-        <MdNotifications
-          className="text-2xl text-gray-600 cursor-pointer hover:text-gray-800"
-          onClick={() => setNotification(!notification)}
-        /> {notification && <Notification close={()=>setNotification(false)}/>}
+          <MdNotifications className="text-2xl text-white cursor-pointer hover:text-gray-200 transition-all duration-300" onClick={() => setNotification(!notification)} />
+          {notification && <Notification close={() => setNotification(false)} />}
         </div>
+        
         {/* user dropdown */}
         <div>
-        <FaUser
-          className="text-xl text-gray-600 cursor-pointer hover:text-gray-800"
-          onClick={() => setProfile(!profile)}
-        /> {profile && <Profile close={()=>setProfile(false)} /> }
+          <FaUser className="text-xl text-white cursor-pointer hover:text-gray-200 transition-all duration-300" onClick={() => setProfile(!profile)} />
+          {profile && <Profile close={() => setProfile(false)} />}
         </div>
-        <CgMenuLeft
-          className="text-2xl text-gray-600 md:hidden cursor-pointer hover:text-gray-800"
-          onClick={() => setSidebar(!sidebar)}
-        />
+        
+        <CgMenuLeft className="text-2xl text-white md:hidden cursor-pointer hover:text-gray-200 transition-all duration-300" onClick={() => setSidebar(!sidebar)} />
       </div>
 
       {/* Sidebar (Mobile Menu) */}

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import ProfileHeader from "../components/Profile-components/ProfileHeader/profileHeader";
 import ProfileTabs from "../components/Profile-components/ProfileTabs/profileTabs";
 import NFTCard from "../components/NFTCard/nftCard";
+import NavBar from "../components/NavBar/NavBar";
 
 interface NFT {
   id: number;
@@ -40,9 +41,14 @@ export default function Profile() {
   const [activeTab, setActiveTab] = useState("Owned NFTs");
 
   return (
-    <div className="max-w-4xl mx-auto py-10 px-5">
-      {/* Profile Header */}
-      <ProfileHeader user={user} />
+    <div className=" mx-auto  ">
+      <NavBar/>
+      <div className="px-5">
+ {/* Profile Header */}
+ <div className="py-24">
+       <ProfileHeader user={user} />
+       </div>
+     
 
       {/* Tabs - Made Horizontally Scrollable on Mobile */}
       <div className="overflow-x-auto scrollbar-hide flex gap-4 py-4 sm:justify-center">
@@ -80,6 +86,8 @@ export default function Profile() {
       {activeTab === "Activity" && (
         <p className="text-gray-400 text-center mt-6">No activity yet.</p>
       )}
+      </div>
+     
     </div>
   );
 }
