@@ -1,10 +1,12 @@
+"use client"
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
-    <div className="relative flex flex-col md:flex-row  items-center justify-center text-white bg-black min-h-screen px-6 md:px-12 overflow-hidden">
+    <div className=" flex flex-col md:flex-row  items-center justify-center text-white bg-black min-h-screen px-6 md:px-12 overflow-hidden">
       {/* Background Glow */}
       <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 blur-3xl   opacity-20" />
 
@@ -24,9 +26,12 @@ export default function HeroSection() {
 
         {/* CTA Buttons */}
         <div className="mt-6 flex justify-center gap-4">
+          <Link href="/MintNFT">
           <button className="px-6 py-3 rounded-full bg-purple-600 hover:bg-purple-700 transition text-white font-semibold shadow-lg">
-            Start Collecting
+            Start minting
           </button>
+          </Link>
+         
           <button className="px-6 py-3 rounded-full bg-transparent border border-purple-500 hover:bg-purple-500 transition text-white font-semibold shadow-lg">
             Learn More
           </button>

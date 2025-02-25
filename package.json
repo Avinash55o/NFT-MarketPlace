@@ -13,6 +13,9 @@
     "hardhat": "^2.22.18"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.9.3"
+    "@openzeppelin/contracts": "^4.9.3",
+    "dotenv": "^16.4.7",
+    "ether": "^0.0.9",
+    "web3modal": "^1.9.12"
   }
 }
